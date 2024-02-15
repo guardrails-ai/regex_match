@@ -15,7 +15,7 @@ This validator ensures that any given output follows a pre-specified regex rule.
 ## Installation
 
 ```bash
-$ gudardrails hub install hub://guardrails/regex_match
+$ guardrails hub install hub://guardrails/regex_match
 ```
 
 ## Usage Examples
