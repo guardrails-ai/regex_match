@@ -19,10 +19,10 @@ class RegexMatch(Validator):
 
     **Key Properties**
 
-    | Property                      | Description                       |
-    | ----------------------------- | --------------------------------- |
-    | Name for `format` attribute   | `regex_match`                     |
-    | Supported data types          | `string`                          |
+    | Property                      | Description                                           |
+    | ----------------------------- | ----------------------------------------------------- |
+    | Name for `format` attribute   | `guardrails/regex_match`                              |
+    | Supported data types          | `string`                                              |
     | Programmatic fix              | Generate a string that matches the regular expression |
 
     Args:
@@ -46,13 +46,14 @@ class RegexMatch(Validator):
             "search",
         ], 'match_type must be in ["fullmatch", "search"]'
 
-        super().__init__(on_fail=on_fail, match_type=match_type, regex=regex)
+        super().__init__(on_fail=on_fail, regex=regex, match_type=match_type)
         self._regex = regex
         self._match_type = match_type
 
     def validate(self, value: Any, metadata: Dict) -> ValidationResult:
+        """Validation method for regex_match."""
+
         p = re.compile(self._regex)
-        """Validates that value matches the provided regular expression."""
         # Pad matching string on either side for fix
         # example if we are performing a regex search
         str_padding = (
@@ -66,6 +67,3 @@ class RegexMatch(Validator):
                 fix_value=self._fix_str,
             )
         return PassResult()
-
-    def to_prompt(self, with_keywords: bool = True) -> str:
-        return "results should match " + self._regex
