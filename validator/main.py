@@ -50,7 +50,7 @@ class RegexMatch(Validator):
         self._regex = regex
         self._match_type = match_type
 
-    def validate(self, value: Any, metadata: Dict) -> ValidationResult:
+    def validate(self, value: Any, metadata: Dict = {}) -> ValidationResult:
         """Validation method for regex_match."""
 
         p = re.compile(self._regex)
