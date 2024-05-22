@@ -35,7 +35,9 @@ from guardrails.hub import RegexMatch
 from guardrails import Guard
 
 # Use the Guard with the validator
-guard = Guard().use(RegexMatch, regex="Open.*", on_fail="exception")
+guard = Guard().use(
+    RegexMatch, regex="Open.*", on_fail="exception"
+)
 
 # Test passing response
 guard.validate(
@@ -62,9 +64,9 @@ Validation failed for field with errors: Result must match Open.*
 Initializes a new instance of the Validator class.
 
 **Parameters**
-- **`regex`** _(str):_ String representing the regex pattern
-- **`match_type`** _(Optional[str]):_ One of `search` or `fullmatch`
-- **`on_fail`** *(str, Callable):* The policy to enact when a validator fails. If `str`, must be one of `reask`, `fix`, `filter`, `refrain`, `noop`, `exception` or `fix_reask`. Otherwise, must be a function that is called when the validator fails.
+- **`regex`** *(str)*: String representing the regex pattern
+- **`match_type`** *(Optional[str])*: One of `search` or `fullmatch`
+- **`on_fail`** *(str, Callable)*: The policy to enact when a validator fails. If `str`, must be one of `reask`, `fix`, `filter`, `refrain`, `noop`, `exception` or `fix_reask`. Otherwise, must be a function that is called when the validator fails.
 </ul>
 <br/>
 
@@ -78,7 +80,7 @@ Note:
 2. When invoking `guard.parse(...)`, ensure to pass the appropriate `metadata` dictionary that includes keys and values required by this validator. If `guard` is associated with multiple validators, combine all necessary metadata into a single dictionary.
 
 **Parameters**
-- **`value`** *(Any):* The input value to validate.
-- **`metadata`** *(dict):* A dictionary containing metadata required for validation. No additional metadata keys are needed for this validator.
+- **`value`** *(Any)*: The input value to validate.
+- **`metadata`** *(dict)*: A dictionary containing metadata required for validation. No additional metadata keys are needed for this validator.
 
 </ul>
